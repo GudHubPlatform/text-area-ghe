@@ -27,21 +27,8 @@ class GhTextArea extends GhHtmlElement {
 		this.textarea.addEventListener('change', () => this.handleUserChange());
 	};
 
-	updateData = (data) => {
-		this.textarea.textContent = data;
-		this.handleDataUpdate();
-	};
-
-	handleDataUpdate = () => {
-		console.log('handled data update');
-	};
-
 	handleUserChange = () => {
-		console.log('handled user change');
-	};
-
-	subscribeOnDataUpdate = () => {
-		// this.destroyDataSubscribe = gudhub.on('gh_value_update', );
+		this.value = this.textarea.value;
 	};
 }
 
