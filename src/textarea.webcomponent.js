@@ -12,7 +12,7 @@ class GhTextArea extends GhHtmlElement {
 	// onInit() is called after parent gh-element scope is ready
 
 	onInit() {
-		render(html);
+		super.render(html);
 	}
 
 	// disconnectedCallback() is called after the component is destroyed 
