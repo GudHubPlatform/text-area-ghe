@@ -8,12 +8,13 @@ class GhTextArea extends GhHtmlElement {
 	constructor() {
 		super();
 		this.textarea;
-		this.destroyDataSubscribe;
+		this.maxSymbols;
 	}
 
 	// onInit() is called after parent gh-element scope is ready
 
 	onInit() {
+		this.maxSymbols = this.scope.field_model.data_model.maxSymbols;
 		super.render(html);
 		this.textarea = this.getElementsByTagName('textarea')[0];
 		this.attachListeners();

@@ -1,7 +1,7 @@
 <textarea
     id="textarea"
     class="disable-gudhub-styles"
-    maxlength="256"
+    maxlength="${!isNaN(maxSymbols) && maxSymbols > 0 ? maxSymbols : 256}"
     placeholder="Write your text here..."
 >
 ${value ? value : ''}
