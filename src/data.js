@@ -7,6 +7,7 @@ export default class GhStudyJournalData {
 			constructor: 'field',
 			name: 'Text Area',
 			icon: 'text_icon',
+            type: 'text_area',
 			model: {
 				field_id: 0,
 				field_name: 'Text Area',
