@@ -25,12 +25,17 @@ class GhTextArea extends GhHtmlElement {
 	}
 
 	attachListeners = () => {
-		this.textarea.addEventListener('change', () => this.handleUserChange());
+		this.textarea.addEventListener('blur', () => this.handleSave());
 	};
 
-	handleUserChange = () => {
+	handleSave = () => {
 		this.value = this.textarea.value;
+		this.scope.$apply();
 	};
+
+	onUpdate() {
+		super.render(html);
+	}
 }
 
 // Register web component only if it is not registered yet

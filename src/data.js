@@ -25,6 +25,15 @@ export default class GhStudyJournalData {
 								show_field: 1
 							},
 							style: { position: 'beetwen' }
+						},
+						{
+							src: 'table',
+							id: 'value',
+							settings: {
+								editable: 0,
+								show_field_name: 0,
+								show_field: 1
+							}
 						}
 					]
 				}
