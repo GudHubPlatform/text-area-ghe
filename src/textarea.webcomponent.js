@@ -3,8 +3,6 @@ import html from './textarea.html';
 import './style.scss';
 
 class GhTextArea extends GhHtmlElement {
-	// Constructor with super() is required for native web component initialization
-
 	constructor() {
 		super();
 		this.textarea;
@@ -12,34 +10,52 @@ class GhTextArea extends GhHtmlElement {
 	}
 
 	// onInit() is called after parent gh-element scope is ready
-
 	onInit() {
 		this.maxSymbols = this.scope.field_model.data_model.maxSymbols;
-		super.render(html);
-		this.textarea = this.getElementsByTagName('textarea')[0];
+		this.renderComponent();
 		this.attachListeners();
 	}
 
 	// disconnectedCallback() is called after the component is destroyed 
 	disconnectedCallback() {
+		// Add any cleanup logic if necessary
+	}
+
+	renderComponent() {
+		if (this.hasAttribute('read-only')) {
+			let maxSymbolsToDisplay = this.scope.field_model.settings.maxSymbols;
+			maxSymbolsToDisplay = !isNaN(maxSymbolsToDisplay) ? parseInt(maxSymbolsToDisplay, 10) : null;
+			let displayValue = this.value;
+			if (maxSymbolsToDisplay >= 0 && maxSymbolsToDisplay < this.value.length) {
+				displayValue = this.value.slice(0, maxSymbolsToDisplay) + '...';
+			}
+
+			super.render(`<div>${displayValue}</div>`);
+		} else {
+			super.render(html);
+			this.textarea = this.getElementsByTagName('textarea')[0];
+		}
 	}
 
 	attachListeners = () => {
-		this.textarea.addEventListener('blur', () => this.handleSave());
+		if (!this.hasAttribute('read-only') && this.textarea) {
+			this.textarea.addEventListener('blur', () => this.handleSave());
+		}
 	};
 
 	handleSave = () => {
-		this.value = this.textarea.value;
-		this.scope.$apply();
+		if (!this.hasAttribute('read-only')) {
+			this.value = this.textarea.value;
+			this.scope.$apply();
+		}
 	};
 
 	onUpdate() {
-		super.render(html);
+		this.renderComponent();
 	}
 }
 
 // Register web component only if it is not registered yet
-
 if (!customElements.get('gh-text-area')) {
 	customElements.define('gh-text-area', GhTextArea);
 }

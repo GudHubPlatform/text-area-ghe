@@ -15,6 +15,7 @@ export default class GhStudyJournalData {
 				data_type: 'text_area',
 				data_model: {
 					maxSymbols: 256,
+					readOnlyMaxSymbols: 256,
 					interpretation: [
 						{
 							src: 'form',
@@ -28,11 +29,12 @@ export default class GhStudyJournalData {
 						},
 						{
 							src: 'table',
-							id: 'value',
+							id: 'read_only',
 							settings: {
 								editable: 0,
 								show_field_name: 0,
-								show_field: 1
+								show_field: 1,
+								maxSymbols: 256
 							}
 						}
 					]
@@ -55,6 +57,12 @@ export default class GhStudyJournalData {
 				id: 'value',
 				name: 'Value',
 				content: () => value
+			},
+			{
+				id: 'read_only',
+				name: 'Read-only',
+				content: () =>
+					'<gh-text-area read-only app-id="{{appId}}" item-id="{{itemId}}" field-id="{{fieldId}}"></gh-text-area>'
 			}
 		];
 	}
@@ -77,6 +85,26 @@ export default class GhStudyJournalData {
 									data_type: 'number',
 									field_name: 'Max Symbols',
 									name_space: 'max_symbols',
+								};
+							}
+						}
+					]
+				]
+			},
+			{
+				title: 'Style',
+				icon: 'eye',
+				type: 'interpretation_setting',
+				columns_list: [
+					[
+						{
+							type: 'ghElement',
+							property: 'interpreter.settings.maxSymbols',
+							data_model: function () {
+								return {
+									data_type: 'number',
+									field_name: 'Max Symbols',
+									name_space: 'read_only_max_symbols',
 								};
 							}
 						}
