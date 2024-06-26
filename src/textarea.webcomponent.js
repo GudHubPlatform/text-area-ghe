@@ -56,6 +56,6 @@ class GhTextArea extends GhHtmlElement {
 }
 
 // Register web component only if it is not registered yet
-if (!customElements.get('gh-text-area')) {
-	customElements.define('gh-text-area', GhTextArea);
+if (!window.customElements.get('gh-text-area')) {
+	window.customElements.define('gh-text-area', GhTextArea);
 }
