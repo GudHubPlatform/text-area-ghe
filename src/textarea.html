@@ -1,0 +1,12 @@
+<div class="gh-textarea-wrapper">
+    <textarea
+        class="gh-textarea disable-gudhub-styles"
+        maxlength="${!isNaN(maxSymbols) && maxSymbols > 0 ? maxSymbols : 256}"
+        placeholder="Write your text here..."
+    >${value ? value : ''}</textarea>
+    <div class="gh-textarea-footer">
+        <span class="gh-textarea-counter"></span>
+        <span class="gh-textarea-save-hint">Ctrl+S to save</span>
+        <span class="gh-textarea-status"></span>
+    </div>
+</div>
